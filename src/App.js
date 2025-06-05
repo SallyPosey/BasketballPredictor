@@ -3,7 +3,7 @@ import './App.css';
 import ModelSelector from './components/ModelSelector';
 import InputForm from './components/InputForm';
 import { modelA_predict } from './models/modelA';
-import backgroundImage from './media/sharkwallpaper.png';
+import backgroundImage from '../src/media/sharkwallpaper.png';
 
 function App() {
   const [selectedModel, setSelectedModel] = useState(modelA_predict);
