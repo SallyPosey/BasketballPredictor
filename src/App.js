@@ -3,6 +3,7 @@ import './App.css';
 import ModelSelector from './components/ModelSelector';
 import InputForm from './components/InputForm';
 import { modelA_predict } from './models/modelA';
+import backgroundImage from './media/sharkwallpaper.png';
 
 function App() {
   const [selectedModel, setSelectedModel] = useState(modelA_predict);
@@ -27,18 +28,20 @@ function App() {
 
   return (
     <div className="App">
-      <header className="App-header">
-        <h1>Basketball Game Predictor</h1>
-        <ModelSelector onModelSelect={handleModelSelect} />
-        <p>Currently using: {modelName}</p>
-        <InputForm onInputChange={handleInputChange} />
-        {prediction && (
-          <div className="prediction-result">
-            <h2>Prediction: {prediction.prediction}</h2>
-            <p>Confidence: {prediction.confidence}</p>
-          </div>
-        )}
-      </header>
+      <div className="page-background" style={{ backgroundImage: `url(${backgroundImage})` }}>
+        <header className="App-header">
+          <h1>Basketball Game Predictor</h1>
+          <ModelSelector onModelSelect={handleModelSelect} />
+          <p>Currently using: {modelName}</p>
+          <InputForm onInputChange={handleInputChange} />
+          {prediction && (
+            <div className="prediction-result">
+              <h2>Prediction: {prediction.prediction}</h2>
+              <p>Confidence: {prediction.confidence}</p>
+            </div>
+          )}
+        </header>
+      </div>
     </div>
   );
 }

@@ -38,7 +38,7 @@
 }
 
 .page-background {
-  background-image: url('/media/sharkwallpaper.png');
+  background-image: var(--background-image);
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
