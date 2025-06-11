@@ -10,14 +10,6 @@ function App() {
   const [modelFunction, setModelFunction] = useState(null);
   const [prediction, setPrediction] = useState(null);
   const [showAbout, setShowAbout] = useState(false);
-  const [formInputs, setFormInputs] = useState({
-    S_fg_pct: 50,
-    BC_to: 10,
-    S_3pt_m: 5,
-    BC_stl: 5,
-    R_reb: 20,
-    S_ft_pct: 75
-  });
 
   // Handler for model selection
   const handleModelSelect = (func) => {
@@ -26,7 +18,6 @@ function App() {
 
   // Handler for input changes
   const handleInputChange = (newInputs) => {
-    setFormInputs(newInputs);
     if (modelFunction) {
       const result = modelFunction(newInputs);
       setPrediction(result);
