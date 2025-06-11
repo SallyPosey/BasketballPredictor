@@ -79,8 +79,8 @@ function App() {
               <p>This tool is not just for prediction. It is built to support strategic thinking and performance insight for coaches, players, analysts, and fans.</p>
               
               <p style={{ marginTop: '2rem', fontStyle: 'italic' }}>
-                Creator: Sally Posey,<br />
-                June 2025
+                Created by Sally Posey<br />
+                June 2026
               </p>
             </div>
           </div>
