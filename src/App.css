@@ -398,4 +398,23 @@ h1 {
     padding: 8px 20px;
     font-size: 0.9rem;
   }
+
+  .prediction-result {
+    width: 95%;
+    padding: 1rem;
+    margin: 1rem auto;
+  }
+
+  .prediction-result .outcome {
+    font-size: 2rem;
+    word-break: break-word;
+  }
+
+  .prediction-result p {
+    font-size: 1rem;
+  }
+
+  .prediction-result .confidence {
+    font-size: 1.1rem;
+  }
 }
