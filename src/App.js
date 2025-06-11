@@ -7,10 +7,10 @@ import sharkBasketball from './media/shark-basketball.png';
 import logo from './media/logo.png';
 
 function App() {
-  const [selectedModel, setSelectedModel] = useState('modelA');
   const [modelFunction, setModelFunction] = useState(null);
   const [prediction, setPrediction] = useState(null);
-  const [inputs, setInputs] = useState({
+  const [showAbout, setShowAbout] = useState(false);
+  const [formInputs, setFormInputs] = useState({
     S_fg_pct: 50,
     BC_to: 10,
     S_3pt_m: 5,
@@ -19,60 +19,14 @@ function App() {
     S_ft_pct: 75
   });
 
-  const variableConfig = {
-    S_fg_pct: {
-      label: "Field Goal Percentage",
-      min: 0,
-      max: 100,
-      step: 0.1,
-      unit: "%"
-    },
-    BC_to: {
-      label: "Turnovers",
-      min: 0,
-      max: 30,
-      step: 1,
-      unit: ""
-    },
-    S_3pt_m: {
-      label: "Three-pointers",
-      min: 0,
-      max: 20,
-      step: 1,
-      unit: ""
-    },
-    BC_stl: {
-      label: "Steals",
-      min: 0,
-      max: 15,
-      step: 1,
-      unit: ""
-    },
-    R_reb: {
-      label: "Total Rebounds",
-      min: 0,
-      max: 50,
-      step: 1,
-      unit: ""
-    },
-    S_ft_pct: {
-      label: "Free-throw Percentage",
-      min: 0,
-      max: 100,
-      step: 0.1,
-      unit: "%"
-    }
-  };
-
   // Handler for model selection
-  const handleModelSelect = (func, modelKey) => {
+  const handleModelSelect = (func) => {
     setModelFunction(() => func);
-    setSelectedModel(modelKey);
   };
 
   // Handler for input changes
   const handleInputChange = (newInputs) => {
-    setInputs(newInputs);
+    setFormInputs(newInputs);
     if (modelFunction) {
       const result = modelFunction(newInputs);
       setPrediction(result);
@@ -102,6 +56,44 @@ function App() {
             )}
           </div>
         </header>
+        <button className="about-button" onClick={() => setShowAbout(true)}>About</button>
+        
+        <div 
+          className={`modal-overlay ${showAbout ? 'active' : ''}`}
+          onClick={(e) => {
+            if (e.target.className.includes('modal-overlay')) {
+              setShowAbout(false);
+            }
+          }}
+        >
+          <div className="modal-content">
+            <button 
+              className="modal-close" 
+              onClick={() => setShowAbout(false)}
+              aria-label="Close modal"
+            >×</button>
+            <h2 className="modal-title">About</h2>
+            <div className="modal-text">
+              <p>The Basketball Game Predictor is an interactive tool designed to help users explore how key game statistics influence the outcome of a basketball match. Built using real-life data from the Miami Dade College women's basketball team, this app leverages historical scores and advanced statistical analysis to highlight the six most important features that impact game results.</p>
+              
+              <p>These six features (<strong>field goal percentage, turnovers, three-pointers made, steals, total rebounds, and free-throw percentage</strong>) were identified through in-depth data analysis as the most predictive of win or loss outcomes. By adjusting these inputs, users can see how each factor affects the prediction in real time.</p>
+              
+              <p>The predictor runs three separate models for comparison:</p>
+              <ul style={{ textAlign: 'left', marginLeft: '20px' }}>
+                <li><strong>2024 to 2025 Season</strong>: Focuses solely on last season's performance</li>
+                <li><strong>2023 to 2025 Seasons</strong>: Combines data from the past two seasons</li>
+                <li><strong>Past 11 Seasons</strong>: Offers a comprehensive long-term analysis of all seasons since 2013 to 2014</li>
+              </ul>
+              
+              <p>This tool is not just for prediction. It is built to support strategic thinking and performance insight for coaches, players, analysts, and fans.</p>
+              
+              <p style={{ marginTop: '2rem', fontStyle: 'italic' }}>
+                Creator: Sally Posey,<br />
+                June 2025
+              </p>
+            </div>
+          </div>
+        </div>
       </div>
     </BackgroundImage>
   );
