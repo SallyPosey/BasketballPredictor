@@ -13,23 +13,32 @@ function App() {
 
   // Handler for model selection
   const handleModelSelect = (func, modelId) => {
-    setModelFunction(func);
+    if (typeof func !== 'function') {
+      console.error('Invalid model function provided');
+      return;
+    }
+    setModelFunction(() => func);
     setPrediction(null); // Reset prediction when model changes
   };
 
   // Handler for input changes
   const handleInputChange = (newInputs) => {
-    if (modelFunction) {
-      try {
-        const result = modelFunction(newInputs);
+    if (!modelFunction || !newInputs) {
+      return;
+    }
+    try {
+      const result = modelFunction(newInputs);
+      if (result && typeof result === 'object') {
         setPrediction(result);
-      } catch (error) {
-        console.error('Error making prediction:', error);
-        setPrediction({
-          prediction: 'Error',
-          confidence: 'Unable to make prediction'
-        });
+      } else {
+        throw new Error('Invalid prediction result');
       }
+    } catch (error) {
+      console.error('Error making prediction:', error);
+      setPrediction({
+        prediction: 'Error',
+        confidence: 'Unable to make prediction'
+      });
     }
   };
 
