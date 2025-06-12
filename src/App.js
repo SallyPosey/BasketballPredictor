@@ -12,8 +12,9 @@ function App() {
   const [showAbout, setShowAbout] = useState(false);
 
   // Handler for model selection
-  const handleModelSelect = (func) => {
+  const handleModelSelect = (func, modelId) => {
     setModelFunction(() => func);
+    setPrediction(null); // Reset prediction when model changes
   };
 
   // Handler for input changes
