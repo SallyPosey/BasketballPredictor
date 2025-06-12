@@ -72,6 +72,15 @@ const InputForm = ({ onInputChange }) => {
   };
 
   const handleChange = (name, value) => {
+    // Handle empty or invalid input
+    if (value === '' || isNaN(value)) {
+      setErrors(prev => ({
+        ...prev,
+        [name]: 'Please enter a valid number'
+      }));
+      return;
+    }
+
     const numValue = parseFloat(value);
     const error = validateInput(name, numValue);
     
@@ -86,6 +95,7 @@ const InputForm = ({ onInputChange }) => {
     };
     setInputs(newInputs);
     
+    // Only call onInputChange if there are no errors
     if (!error) {
       onInputChange(newInputs);
     }

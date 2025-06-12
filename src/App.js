@@ -20,8 +20,16 @@ function App() {
   // Handler for input changes
   const handleInputChange = (newInputs) => {
     if (modelFunction) {
-      const result = modelFunction(newInputs);
-      setPrediction(result);
+      try {
+        const result = modelFunction(newInputs);
+        setPrediction(result);
+      } catch (error) {
+        console.error('Error making prediction:', error);
+        setPrediction({
+          prediction: 'Error',
+          confidence: 'Unable to make prediction'
+        });
+      }
     }
   };
 
