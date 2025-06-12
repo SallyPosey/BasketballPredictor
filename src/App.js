@@ -13,7 +13,7 @@ function App() {
 
   // Handler for model selection
   const handleModelSelect = (func, modelId) => {
-    setModelFunction(() => func);
+    setModelFunction(func);
     setPrediction(null); // Reset prediction when model changes
   };
 
