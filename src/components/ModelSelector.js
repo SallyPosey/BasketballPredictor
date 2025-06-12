@@ -24,6 +24,10 @@ const ModelSelector = ({ onModelSelect }) => {
 
   const handleModelChange = (event) => {
     const selectedModel = event.target.value;
+    if (selectedModel === '') {
+      onModelSelect(null, '');
+      return;
+    }
     const modelInfo = modelConfig[selectedModel];
     onModelSelect(modelInfo.predict, selectedModel);
   };
@@ -31,7 +35,14 @@ const ModelSelector = ({ onModelSelect }) => {
   return (
     <div className="model-selector">
       <label htmlFor="model-select">Select Prediction Model: </label>
-      <select id="model-select" onChange={handleModelChange} className="model-dropdown" defaultValue="modelA">
+      <select 
+        id="model-select" 
+        onChange={handleModelChange} 
+        className="model-dropdown" 
+        defaultValue=""
+        required
+      >
+        <option value="" disabled>Select Model...</option>
         {Object.entries(modelConfig).map(([key, model]) => (
           <option key={key} value={key}>{model.name}</option>
         ))}
