@@ -16,4 +16,14 @@ export function modelA_predict({ S_fg_pct, BC_to, S_3pt_m, BC_stl, R_reb, S_ft_p
     prediction: probability > 0.5 ? "Win" : "Loss",
     confidence: (probability * 100).toFixed(1) + "%"
   };
-} 
+}
+
+// Model A Averages (24-25 Season)
+export const modelA_averages = {
+  S_fg_pct: 43.2,
+  BC_to: 16.6,
+  S_3pt_m: 6.4,
+  BC_stl: 11.6,
+  R_reb: 44.2,
+  S_ft_pct: 64.6
+}; 

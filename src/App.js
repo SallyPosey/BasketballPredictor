@@ -10,14 +10,16 @@ function App() {
   const [modelFunction, setModelFunction] = useState(null);
   const [prediction, setPrediction] = useState(null);
   const [showAbout, setShowAbout] = useState(false);
+  const [modelAverages, setModelAverages] = useState(null);
 
   // Handler for model selection
-  const handleModelSelect = (func, modelId) => {
+  const handleModelSelect = (func, modelId, averages) => {
     if (typeof func !== 'function') {
       console.error('Invalid model function provided');
       return;
     }
     setModelFunction(() => func);
+    setModelAverages(averages);
     setPrediction(null); // Reset prediction when model changes
   };
 
@@ -53,7 +55,7 @@ function App() {
           </div>
           <div className="frosted-box">
             <ModelSelector onModelSelect={handleModelSelect} />
-            <InputForm onInputChange={handleInputChange} />
+            <InputForm onInputChange={handleInputChange} modelAverages={modelAverages} />
             {prediction && (
               <div className="prediction-result">
                 <h2>Prediction Result</h2>

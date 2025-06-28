@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-const InputForm = ({ onInputChange }) => {
+const InputForm = ({ onInputChange, modelAverages }) => {
   const [inputs, setInputs] = useState({
     S_fg_pct: 0,
     BC_to: 0,
@@ -102,37 +102,51 @@ const InputForm = ({ onInputChange }) => {
   };
 
   return (
-    <div className="input-form">
-      {Object.entries(variableConfig).map(([key, config]) => (
-        <div key={key} className="input-group">
-          <label htmlFor={key}>
-            {config.label}
-          </label>
-          <div className="input-controls">
-            <input
-              type="number"
-              id={key}
-              value={inputs[key]}
-              onChange={(e) => handleChange(key, e.target.value)}
-              min={config.min}
-              max={config.max}
-              step={config.step}
-              className={`number-input ${errors[key] ? 'error' : ''}`}
-            />
-            <input
-              type="range"
-              value={inputs[key]}
-              onChange={(e) => handleChange(key, e.target.value)}
-              min={config.min}
-              max={config.max}
-              step={config.step}
-              className={`slider ${errors[key] ? 'error' : ''}`}
-            />
-            <span className="unit">{config.unit}</span>
-          </div>
-          {errors[key] && <span className="error-message">{errors[key]}</span>}
+    <div className="input-form-container" style={{ display: 'flex', alignItems: 'flex-start' }}>
+      {modelAverages && (
+        <div className="averages-column" style={{ marginRight: '20px', textAlign: 'right' }}>
+          <h3 style={{ marginTop: '0', marginBottom: '20px' }}>AVERAGES:</h3>
+          {Object.entries(variableConfig).map(([key]) => (
+            <div key={`avg-${key}`} className="average-value" style={{ height: '60px', display: 'flex', alignItems: 'center', justifyContent: 'flex-end', marginBottom: '10px' }}>
+              {modelAverages[key] !== undefined && (
+                <span>{modelAverages[key].toFixed(1)}{variableConfig[key].unit}</span>
+              )}
+            </div>
+          ))}
         </div>
-      ))}
+      )}
+      <div className="input-form">
+        {Object.entries(variableConfig).map(([key, config]) => (
+          <div key={key} className="input-group">
+            <label htmlFor={key}>
+              {config.label}
+            </label>
+            <div className="input-controls">
+              <input
+                type="number"
+                id={key}
+                value={inputs[key]}
+                onChange={(e) => handleChange(key, e.target.value)}
+                min={config.min}
+                max={config.max}
+                step={config.step}
+                className={`number-input ${errors[key] ? 'error' : ''}`}
+              />
+              <input
+                type="range"
+                value={inputs[key]}
+                onChange={(e) => handleChange(key, e.target.value)}
+                min={config.min}
+                max={config.max}
+                step={config.step}
+                className={`slider ${errors[key] ? 'error' : ''}`}
+              />
+              <span className="unit">{config.unit}</span>
+            </div>
+            {errors[key] && <span className="error-message">{errors[key]}</span>}
+          </div>
+        ))}
+      </div>
     </div>
   );
 };
