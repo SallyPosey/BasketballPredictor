@@ -40,6 +40,7 @@
   }
 }
 
+
 .page-background {
   background-image: var(--background-image);
   background-size: cover;
@@ -417,4 +418,20 @@ h1 {
   .prediction-result .confidence {
     font-size: 1.1rem;
   }
+}
+
+
+/* Presentation-only: add vertical spacing between averages (no impact on inputs) */
+.averages-column {
+  display: flex;                /* stack averages vertically */
+  flex-direction: column;
+  gap: 20px;                    /* controls the space BETWEEN averages */
+}
+
+.averages-column .average-value {
+  margin: 0 !important;         /* ignore the inline 10px margin */
+  height: 60px;                 /* keep your original row height */
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
 }
